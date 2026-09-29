@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FitBuddy - All Users
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="navbar">
+
+        <a
+            href="/"
+            class="logo"
+        >
+            Fit<span>Buddy</span> 🤖
+        </a>
+
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/docs">
+                API Docs
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<section class="result-header">
+
+    <p class="tag">
+        ADMIN DASHBOARD
+    </p>
+
+    <h1>
+        All Users
+    </h1>
+
+    <p>
+        View registered users and their
+        generated AI fitness plans.
+    </p>
+
+</section>
+
+
+{% if users %}
+
+
+{% for user in users %}
+
+
+<section class="user-card">
+
+
+<div class="user-header">
+
+    <div>
+
+        <span class="user-label">
+            USER
+        </span>
+
+        <h2>
+            {{ user.name }}
+        </h2>
+
+        <p>
+            ID: {{ user.user_id }}
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="profile">
+
+
+<div>
+    <small>
+        Age
+    </small>
+
+    <strong>
+        {{ user.age }}
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Weight
+    </small>
+
+    <strong>
+        {{ user.weight }} kg
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Goal
+    </small>
+
+    <strong>
+        {{ user.goal|title }}
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Intensity
+    </small>
+
+    <strong>
+        {{ user.intensity|title }}
+    </strong>
+</div>
+
+
+</div>
+
+
+{% if user.plans %}
+
+
+{% for plan in user.plans %}
+
+
+<details>
+
+    <summary>
+
+        Plan #{{ plan.id }}
+
+        -
+        {{ plan.created_at }}
+
+    </summary>
+
+
+    <div class="admin-plan">
+
+        <h3>
+            Original Workout Plan
+        </h3>
+
+        <pre>
+{{ plan.workout_plan }}
+        </pre>
+
+
+        {% if plan.updated_plan %}
+
+        <h3>
+            Updated Workout Plan
+        </h3>
+
+        <pre>
+{{ plan.updated_plan }}
+        </pre>
+
+        {% endif %}
+
+
+        <h3>
+            Nutrition Tip
+        </h3>
+
+        <p>
+            {{ plan.nutrition_tip }}
+        </p>
+
+
+        {% if plan.feedback %}
+
+        <div class="feedback-box">
+
+            <strong>
+                User Feedback
+            </strong>
+
+            <p>
+                {{ plan.feedback }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+</details>
+
+
+{% endfor %}
+
+
+{% else %}
+
+<p class="muted">
+    No fitness plans generated.
+</p>
+
+{% endif %}
+
+
+</section>
+
+
+{% endfor %}
+
+
+{% else %}
+
+
+<section class="result-card">
+
+    <h2>
+        No users found.
+    </h2>
+
+    <p>
+        Users will appear here after
+        generating their first plan.
+    </p>
+
+</section>
+
+
+{% endif %}
+
+
+</main>
+
+
+<footer>
+
+    FitBuddy © 2026
+
+</footer>
+
+
+</body>
+
+</html>

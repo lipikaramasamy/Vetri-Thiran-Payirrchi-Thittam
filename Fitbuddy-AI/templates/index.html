@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FitBuddy - AI Fitness Plan Generator
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="navbar">
+
+        <a
+            href="/"
+            class="logo"
+        >
+            Fit<span>Buddy</span> 🤖
+        </a>
+
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/docs">
+                API Docs
+            </a>
+
+            <a href="/all-users">
+                Admin
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <p class="tag">
+            AI FITNESS PLAN GENERATOR
+        </p>
+
+
+        <h1>
+
+            Your fitness journey,
+
+            <span>
+                powered by AI.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            FitBuddy uses Generative AI to create
+            a personalised 7-day workout plan,
+            nutrition guidance and adaptive
+            recommendations.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+{% if error %}
+
+<div class="alert error">
+
+    <strong>
+        Error:
+    </strong>
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+
+<section class="form-section">
+
+
+<div class="section-title">
+
+    <p class="tag">
+        GET STARTED
+    </p>
+
+    <h2>
+        Tell us about yourself
+    </h2>
+
+    <p>
+        Enter your basic details and let
+        FitBuddy generate your plan.
+    </p>
+
+</div>
+
+
+<form
+    action="/generate"
+    method="post"
+>
+
+
+<div class="form-grid">
+
+
+<div class="input-group">
+
+    <label>
+        User ID
+    </label>
+
+    <input
+        type="text"
+        name="user_id"
+        placeholder="user001"
+        required
+    >
+
+</div>
+
+
+<div class="input-group">
+
+    <label>
+        Name
+    </label>
+
+    <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        required
+    >
+
+</div>
+
+
+<div class="input-group">
+
+    <label>
+        Age
+    </label>
+
+    <input
+        type="number"
+        name="age"
+        min="13"
+        max="100"
+        placeholder="18"
+        required
+    >
+
+</div>
+
+
+<div class="input-group">
+
+    <label>
+        Weight (kg)
+    </label>
+
+    <input
+        type="number"
+        name="weight"
+        min="20"
+        max="300"
+        step="0.1"
+        placeholder="60"
+        required
+    >
+
+</div>
+
+
+<div class="input-group">
+
+    <label>
+        Fitness Goal
+    </label>
+
+    <select
+        name="goal"
+        required
+    >
+
+        <option value="general wellness">
+            General Wellness
+        </option>
+
+        <option value="weight loss">
+            Weight Loss
+        </option>
+
+        <option value="muscle gain">
+            Muscle Gain
+        </option>
+
+        <option value="flexibility">
+            Flexibility
+        </option>
+
+        <option value="endurance">
+            Endurance
+        </option>
+
+    </select>
+
+</div>
+
+
+<div class="input-group">
+
+    <label>
+        Workout Intensity
+    </label>
+
+    <select
+        name="intensity"
+        required
+    >
+
+        <option value="low">
+            Low
+        </option>
+
+        <option
+            value="medium"
+            selected
+        >
+            Medium
+        </option>
+
+        <option value="high">
+            High
+        </option>
+
+    </select>
+
+</div>
+
+
+</div>
+
+
+<button
+    type="submit"
+    class="generate-button"
+>
+
+    Generate My Plan ✨
+
+</button>
+
+
+</form>
+
+
+</section>
+
+
+<section class="features">
+
+
+<div class="feature">
+
+    <div class="icon">
+        🧠
+    </div>
+
+    <h3>
+        Generative AI
+    </h3>
+
+    <p>
+        Gemini creates a personalised
+        7-day workout plan.
+    </p>
+
+</div>
+
+
+<div class="feature">
+
+    <div class="icon">
+        🥗
+    </div>
+
+    <h3>
+        Nutrition Guidance
+    </h3>
+
+    <p>
+        Get simple nutrition and
+        recovery recommendations.
+    </p>
+
+</div>
+
+
+<div class="feature">
+
+    <div class="icon">
+        🔄
+    </div>
+
+    <h3>
+        Adaptive Plans
+    </h3>
+
+    <p>
+        Give feedback and regenerate
+        your workout plan.
+    </p>
+
+</div>
+
+
+</section>
+
+
+<div class="safety">
+
+    <strong>
+        Safety:
+    </strong>
+
+    FitBuddy provides general wellness
+    information and is not a substitute
+    for professional medical advice.
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+    FitBuddy © 2026
+
+</footer>
+
+
+</body>
+
+</html>

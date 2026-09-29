@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FitBuddy - Your Plan
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="navbar">
+
+        <a
+            href="/"
+            class="logo"
+        >
+            Fit<span>Buddy</span> 🤖
+        </a>
+
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/docs">
+                API Docs
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+{% if error %}
+
+<div class="alert error">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+
+{% if success %}
+
+<div class="alert success">
+
+    {{ success }}
+
+</div>
+
+{% endif %}
+
+
+{% if user and plan %}
+
+
+<section class="result-header">
+
+    <p class="tag">
+        YOUR AI FITNESS PLAN
+    </p>
+
+    <h1>
+        Welcome, {{ user.name }} 👋
+    </h1>
+
+    <p>
+        Your personalised fitness plan
+        has been generated.
+    </p>
+
+</section>
+
+
+<section class="profile">
+
+
+<div>
+    <small>
+        User ID
+    </small>
+
+    <strong>
+        {{ user.user_id }}
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Age
+    </small>
+
+    <strong>
+        {{ user.age }}
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Weight
+    </small>
+
+    <strong>
+        {{ user.weight }} kg
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Goal
+    </small>
+
+    <strong>
+        {{ user.goal|title }}
+    </strong>
+</div>
+
+
+<div>
+    <small>
+        Intensity
+    </small>
+
+    <strong>
+        {{ user.intensity|title }}
+    </strong>
+</div>
+
+
+</section>
+
+
+<section class="result-card">
+
+    <div class="section-title">
+
+        <p class="tag">
+            GEMINI AI OUTPUT
+        </p>
+
+        <h2>
+            🗓️ 7-Day Workout Plan
+        </h2>
+
+    </div>
+
+
+    <pre>{{ plan.workout_plan }}</pre>
+
+</section>
+
+
+{% if plan.updated_plan %}
+
+
+<section class="result-card updated">
+
+    <div class="section-title">
+
+        <p class="tag">
+            UPDATED USING FEEDBACK
+        </p>
+
+        <h2>
+            🔄 Revised Workout Plan
+        </h2>
+
+    </div>
+
+
+    <pre>{{ plan.updated_plan }}</pre>
+
+
+    {% if plan.feedback %}
+
+    <div class="feedback-box">
+
+        <strong>
+            Your feedback:
+        </strong>
+
+        <p>
+            {{ plan.feedback }}
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+</section>
+
+{% endif %}
+
+
+<section class="result-card nutrition">
+
+    <div class="section-title">
+
+        <h2>
+            🥗 Nutrition & Recovery Tip
+        </h2>
+
+    </div>
+
+
+    <p class="nutrition-text">
+
+        {{ plan.nutrition_tip }}
+
+    </p>
+
+</section>
+
+
+<section class="result-card">
+
+    <div class="section-title">
+
+        <p class="tag">
+            AI FEEDBACK LOOP
+        </p>
+
+        <h2>
+            Improve Your Plan 🔄
+        </h2>
+
+        <p>
+            Tell FitBuddy what you want
+            to change.
+        </p>
+
+    </div>
+
+
+    <form
+        action="/update-plan"
+        method="post"
+    >
+
+        <input
+            type="hidden"
+            name="user_id"
+            value="{{ user.user_id }}"
+        >
+
+
+        <textarea
+            name="feedback"
+            placeholder="Example: Make Day 3 a recovery day and add more low-impact cardio."
+            minlength="5"
+            maxlength="1000"
+            required
+        ></textarea>
+
+
+        <button
+            type="submit"
+            class="generate-button"
+        >
+
+            Update My Plan 🔄
+
+        </button>
+
+    </form>
+
+
+</section>
+
+
+<a
+    href="/"
+    class="back-button"
+>
+    ← Create New Plan
+</a>
+
+
+{% endif %}
+
+
+</main>
+
+
+<footer>
+
+    FitBuddy © 2026
+
+</footer>
+
+
+</body>
+
+</html>
